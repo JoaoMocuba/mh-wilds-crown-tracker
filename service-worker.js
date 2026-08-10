@@ -1,4 +1,4 @@
-const CACHE = "mh-wilds-crown-tracker-v1";
+const CACHE = "mh-wilds-crown-tracker-v2";
 const ASSETS = [
   "./",
   "./index.html",
