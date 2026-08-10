@@ -5,202 +5,123 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111111">
 <meta name="description" content="Checklist de coroas do Monster Hunter Wilds">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icones/icon-192.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icones/icon-192.svg" type="image/svg+xml">
 <title>MH Wilds — Crown Tracker</title>
 <style>
-*{box-sizing:border-box}
-:root{color-scheme:dark}
+*{box-sizing:border-box} :root{color-scheme:dark}
 body{margin:0;background:#101010;color:#eee;font-family:Arial,Helvetica,sans-serif}
-button,input,select{font:inherit}
-.app{max-width:900px;margin:auto;padding:14px 14px 30px}
-header{text-align:center;padding:8px 0 14px}
-h1{font-size:27px;margin:4px 0}
-.sub{color:#929292;font-size:14px}
+button,input,select{font:inherit}.app{max-width:900px;margin:auto;padding:14px}
+header{text-align:center;padding:8px 0 14px}h1{font-size:27px;margin:4px 0}.sub{color:#929292;font-size:14px}
 .progress{background:#1c1c1c;border:1px solid #333;border-radius:14px;padding:14px;margin-bottom:12px}
-.progressline{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.progressnum{font-size:20px;font-weight:700}.percent{color:#d8bd45;font-weight:700}
+.progressline{display:flex;justify-content:space-between;margin-bottom:8px}.percent{color:#d8bd45;font-weight:700}
 .track{height:11px;background:#333;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:#d8bd45;transition:.25s}
 .controls{display:grid;grid-template-columns:1fr 205px;gap:8px;margin-bottom:12px}
 input,select{width:100%;background:#1b1b1b;color:#eee;border:1px solid #3b3b3b;border-radius:9px;padding:12px;outline:none}
-input:focus,select:focus{border-color:#777}
-.card{display:flex;gap:13px;background:#191919;border:1px solid #333;border-radius:13px;padding:12px;margin-bottom:10px}
-.card.done{border-color:#52623c}
+.card{display:flex;gap:13px;background:#191919;border:1px solid #333;border-radius:13px;padding:12px;margin-bottom:10px}.card.done{border-color:#52623c}
 .monster-img{width:92px;height:92px;flex:0 0 92px;object-fit:contain;border-radius:10px;background:#111;border:1px solid #333}
-.content{min-width:0;flex:1}
-.top{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.name{font-size:19px;font-weight:700}.status{font-size:12px;color:#aaa;white-space:nowrap}
-.status.done{color:#8bdd82}.status.partial{color:#e0c95b}
-.meta{color:#999;font-size:12px;margin-top:5px;line-height:1.5}
-.event{margin-top:7px;padding:7px 9px;border-radius:8px;background:#222;color:#bbb;font-size:12px}
-.crowns{display:flex;gap:7px;margin-top:9px}
-.crown{border:1px solid #444;background:#232323;color:#999;border-radius:9px;padding:9px 11px;cursor:pointer;flex:0 0 auto}
-.crown.small.active{background:#51491f;border-color:#d8bd45;color:#ffe77a}
-.crown.large.active{background:#274629;border-color:#6dbb69;color:#9be696}
-.empty{text-align:center;color:#777;padding:35px 10px}
-.footer{text-align:center;margin-top:20px}
-.reset{background:none;border:0;color:#777;font-size:12px;cursor:pointer}.reset:hover{color:#e08080}
-@media(max-width:600px){
- .app{padding:10px 10px 25px}
- h1{font-size:24px}
- .controls{grid-template-columns:1fr}
- .card{gap:10px}
- .monster-img{width:76px;height:76px;flex-basis:76px}
- .top{align-items:flex-start;flex-direction:column;gap:3px}
- .crowns{display:grid;grid-template-columns:1fr 1fr}
- .crown{width:100%;padding:10px 5px}
-}
+.monster-img.missing{opacity:.18}.content{min-width:0;flex:1}.top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.name{font-size:19px;font-weight:700}.status{font-size:12px;color:#aaa;white-space:nowrap}.status.done{color:#8bdd82}.status.partial{color:#e0c95b}
+.meta{color:#999;font-size:12px;margin-top:5px;line-height:1.5}.event{margin-top:7px;padding:7px 9px;border-radius:8px;background:#222;color:#bbb;font-size:12px}
+.crowns{display:flex;gap:7px;margin-top:9px}.crown{border:1px solid #444;background:#232323;color:#999;border-radius:9px;padding:9px 11px;cursor:pointer}
+.crown.small.active{background:#51491f;border-color:#d8bd45;color:#ffe77a}.crown.large.active{background:#274629;border-color:#6dbb69;color:#9be696}
+.empty{text-align:center;color:#777;padding:35px 10px}.footer{text-align:center;margin-top:20px}.reset{background:none;border:0;color:#777;font-size:12px;cursor:pointer}
+@media(max-width:600px){.app{padding:10px}.controls{grid-template-columns:1fr}.card{gap:10px}.monster-img{width:76px;height:76px;flex-basis:76px}.top{align-items:flex-start;flex-direction:column;gap:3px}.crowns{display:grid;grid-template-columns:1fr 1fr}.crown{width:100%;padding:10px 5px}}
 </style>
 </head>
 <body>
 <main class="app">
-<header>
-<h1>👑 MH Wilds — Crown Tracker</h1>
-<div class="sub">Marque as coroas enquanto encontra os monstros</div>
-</header>
-
-<section class="progress" aria-label="Progresso">
-<div class="progressline">
-<strong id="progress">0 / 58</strong>
-<span id="percent" class="percent">0%</span>
-</div>
-<div class="track"><div id="fill" class="fill"></div></div>
-</section>
-
+<header><h1>👑 MH Wilds — Crown Tracker</h1><div class="sub">Marque as coroas enquanto encontra os monstros</div></header>
+<section class="progress"><div class="progressline"><strong id="progress">0 / 58</strong><span id="percent" class="percent">0%</span></div><div class="track"><div id="fill" class="fill"></div></div></section>
 <section class="controls">
 <input id="search" type="search" placeholder="🔎 Procurar monstro..." autocomplete="off">
-<select id="filter" aria-label="Filtro">
-<option value="all">👑 Todos</option>
-<option value="none">❌ Faltam as duas</option>
-<option value="one">⚠️ Falta uma</option>
-<option value="small">🟡 Tenho pequena</option>
-<option value="large">🟢 Tenho grande</option>
-<option value="done">✅ Completados</option>
-<option value="event">📜 Event Quest com coroa</option>
+<select id="filter">
+<option value="all">👑 Todos</option><option value="none">❌ Faltam as duas</option><option value="one">⚠️ Falta uma</option>
+<option value="small">🟡 Tenho pequena</option><option value="large">🟢 Tenho grande</option><option value="done">✅ Completados</option><option value="event">📜 Event Quest com coroa</option>
 </select>
 </section>
-
 <section id="list"></section>
-
-<footer class="footer">
-<button class="reset" id="reset">Zerar meu progresso</button>
-</footer>
+<footer class="footer"><button class="reset" id="reset">Zerar meu progresso</button></footer>
 </main>
-
 <script>
-const monsters = [
-{name:"Chatacabra",image:"./imagens/chatacabra.png",hr:"HR 1+",area:"Windward Plains",event:""},
-{name:"Quematrice",image:"imagens/quematrice.png",hr:"HR 1+",area:"Windward Plains",event:"Every Hunter's Dream"},
-{name:"Lala Barina",image:"imagens/lala_barina.png",hr:"HR 1+",area:"Scarlet Forest",event:"Lalas and Toads and Bears, Oh My!"},
-{name:"Congalala",image:"imagens/congalala.png",hr:"HR 21+",area:"Scarlet Forest",event:"Putting Up a Stink / Congalala Courting Carols"},
-{name:"Balahara",image:"imagens/balahara.png",hr:"HR 1+",area:"Windward Plains",event:"Playing the Long Game"},
-{name:"Doshaguma",image:"./imagens/doshaguma.png",hr:"HR 1+",area:"Windward Plains",event:"Lalas and Toads and Bears, Oh My!"},
-{name:"Uth Duna",image:"imagens/uth_duna.png",hr:"HR 1+",area:"Scarlet Forest",event:""},
-{name:"Rompopolo",image:"imagens/rompopolo.png",hr:"HR 1+",area:"Oilwell Basin",event:"Just What the Doctor Ordered"},
-{name:"Rey Dau",image:"imagens/rey_dau.png",hr:"HR 1+",area:"Windward Plains",event:"Razzle Dazzle Frazzle"},
-{name:"Nerscylla",image:"imagens/nerscylla.png",hr:"HR 1+",area:"Oilwell Basin",event:""},
-{name:"Hirabami",image:"imagens/hirabami.png",hr:"HR 1+",area:"Iceshard Cliffs",event:""},
-{name:"Ajarakan",image:"imagens/ajarakan.png",hr:"HR 1+",area:"Oilwell Basin",event:""},
-{name:"Nu Udra",image:"imagens/nu_udra.png",hr:"HR 1+",area:"Oilwell Basin",event:""},
-{name:"Guardian Doshaguma",image:"imagens/guardian_doshaguma.png",hr:"HR 1+",area:"Ruins of Wyveria",event:""},
-{name:"Guardian Rathalos",image:"imagens/guardian_rathalos.png",hr:"HR 1+",area:"Ruins of Wyveria",event:"It's Darker Than You Think"},
-{name:"Guardian Ebony Odogaron",image:"imagens/guardian_ebony_odogaron.png",hr:"HR 1+",area:"Ruins of Wyveria",event:""},
-{name:"Xu Wu",image:"imagens/xu_wu.png",hr:"HR 31+",area:"Ruins of Wyveria",event:"That Won't Work on Me!"},
-{name:"Yian Kut-Ku",image:"imagens/yian_kut_ku.png",hr:"HR 1+",area:"Scarlet Forest",event:""},
-{name:"Gypceros",image:"imagens/gypceros.png",hr:"HR 41+",area:"Windward Plains",event:"Razzle Dazzle Frazzle"},
-{name:"Rathian",image:"imagens/rathian.png",hr:"HR 9+",area:"Windward Plains / Scarlet Forest",event:"A Royal Request"},
-{name:"Guardian Fulgur Anjanath",image:"imagens/guardian_fulgur_anjanath.png",hr:"HR 1+",area:"Ruins of Wyveria",event:""},
-{name:"Rathalos",image:"imagens/rathalos.png",hr:"HR 41+",area:"Scarlet Forest",event:"It's Darker Than You Think"},
-{name:"Gravios",image:"imagens/gravios.png",hr:"HR 41+",area:"Oilwell Basin",event:"Hungry for Ore?"},
-{name:"Blangonga",image:"imagens/blangonga.png",hr:"HR 41+",area:"Iceshard Cliffs",event:"The Snow Has Teeth"},
-{name:"Gore Magala",image:"imagens/gore_magala.png",hr:"HR 21+",area:"Iceshard Cliffs",event:""},
-{name:"Arkveld",image:"imagens/arkveld.png",hr:"HR 1+",area:"Todas as regiões",event:""},
-{name:"Mizutsune",image:"imagens/mizutsune.png",hr:"HR 21+",area:"Scarlet Forest",event:"Playing the Long Game / Every Hunter's Dream"},
-{name:"Lagiacrus",image:"imagens/lagiacrus.png",hr:"HR 31+",area:"Scarlet Forest / Wounded Hollow",event:""},
-{name:"Seregios",image:"imagens/seregios.png",hr:"HR 31+",area:"Windward Plains / Wounded Hollow / Wyveria",event:""}
+const monsters=[
+["Chatacabra","chatacabra.png","HR 1+","Windward Plains",""],
+["Quematrice","quematrice.png","HR 1+","Windward Plains","Every Hunter's Dream"],
+["Lala Barina","lala_barina.png","HR 1+","Scarlet Forest","Lalas and Toads and Bears, Oh My!"],
+["Congalala","congalala.png","HR 21+","Scarlet Forest","Putting Up a Stink / Congalala Courting Carols"],
+["Balahara","balahara.png","HR 1+","Windward Plains","Playing the Long Game"],
+["Doshaguma","doshaguma.png","HR 1+","Windward Plains","Lalas and Toads and Bears, Oh My!"],
+["Uth Duna","uth_duna.png","HR 1+","Scarlet Forest",""],
+["Rompopolo","rompopolo.png","HR 1+","Oilwell Basin","Just What the Doctor Ordered"],
+["Rey Dau","rey_dau.png","HR 1+","Windward Plains","Razzle Dazzle Frazzle"],
+["Nerscylla","nerscylla.png","HR 1+","Oilwell Basin",""],
+["Hirabami","hirabami.png","HR 1+","Iceshard Cliffs",""],
+["Ajarakan","ajarakan.png","HR 1+","Oilwell Basin",""],
+["Nu Udra","nu_udra.png","HR 1+","Oilwell Basin",""],
+["Guardian Doshaguma","guardian_doshaguma.png","HR 1+","Ruins of Wyveria",""],
+["Guardian Rathalos","guardian_rathalos.png","HR 1+","Ruins of Wyveria","It's Darker Than You Think"],
+["Guardian Ebony Odogaron","guardian_ebony_odogaron.png","HR 1+","Ruins of Wyveria",""],
+["Xu Wu","xu_wu.png","HR 31+","Ruins of Wyveria","That Won't Work on Me!"],
+["Yian Kut-Ku","yian_kut_ku.png","HR 1+","Scarlet Forest",""],
+["Gypceros","gypceros.png","HR 41+","Windward Plains","Razzle Dazzle Frazzle"],
+["Rathian","rathian.png","HR 9+","Windward Plains / Scarlet Forest","A Royal Request"],
+["Guardian Fulgur Anjanath","guardian_fulgur_anjanath.png","HR 1+","Ruins of Wyveria",""],
+["Rathalos","rathalos.png","HR 41+","Scarlet Forest","It's Darker Than You Think"],
+["Gravios","gravios.png","HR 41+","Oilwell Basin","Hungry for Ore?"],
+["Blangonga","blangonga.png","HR 41+","Iceshard Cliffs","The Snow Has Teeth"],
+["Gore Magala","gore_magala.png","HR 21+","Iceshard Cliffs",""],
+["Arkveld","arkveld.png","HR 1+","Todas as regiões",""],
+["Mizutsune","mizutsune.png","HR 21+","Scarlet Forest","Playing the Long Game / Every Hunter's Dream"],
+["Lagiacrus","lagiacrus.png","HR 31+","Scarlet Forest / Wounded Hollow",""],
+["Seregios","seregios.png","HR 31+","Windward Plains / Wounded Hollow / Wyveria",""]
 ];
 
-const TOTAL = monsters.length * 2;
-const KEY = "mhWildsCrownTracker_v2";
+const KEY="mhWildsCrownTracker_v2";
+const imageURL=file=>new URL("./imagens/"+file,document.baseURI).href;
 
-function load(){
- try{return JSON.parse(localStorage.getItem(KEY)) || {}}
- catch(e){return {}}
-}
-function save(data){localStorage.setItem(KEY,JSON.stringify(data))}
-function state(i){
- const d=load();
- return d[i] || {small:false,large:false};
-}
-function toggle(i,type){
- const d=load();
- if(!d[i]) d[i]={small:false,large:false};
- d[i][type]=!d[i][type];
- save(d);
- render();
-}
-function matches(m,s,f){
- const n=(s.small?1:0)+(s.large?1:0);
- if(f==="none") return n===0;
- if(f==="one") return n===1;
- if(f==="small") return s.small;
- if(f==="large") return s.large;
- if(f==="done") return n===2;
- if(f==="event") return !!m.event;
- return true;
-}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
+function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+function state(i){const d=load();return d[i]||{small:false,large:false}}
+function toggle(i,t){const d=load();if(!d[i])d[i]={small:false,large:false};d[i][t]=!d[i][t];save(d);render()}
+function matches(m,s,f){const n=(s.small?1:0)+(s.large?1:0);if(f==="none")return n===0;if(f==="one")return n===1;if(f==="small")return s.small;if(f==="large")return s.large;if(f==="done")return n===2;if(f==="event")return!!m[4];return true}
+
 function render(){
- const list=document.getElementById("list");
- const q=document.getElementById("search").value.trim().toLowerCase();
- const f=document.getElementById("filter").value;
- list.innerHTML="";
- let found=0;
+ const list=document.getElementById("list"),q=document.getElementById("search").value.trim().toLowerCase(),f=document.getElementById("filter").value;
+ list.innerHTML="";let found=0;
  monsters.forEach((m,i)=>{
-   const s=state(i);
-   if(!m.name.toLowerCase().includes(q) || !matches(m,s,f)) return;
-   found++;
-   const n=(s.small?1:0)+(s.large?1:0);
-   const done=n===2;
-   const partial=n===1;
-   const card=document.createElement("article");
-   card.className="card"+(done?" done":"");
-   card.innerHTML=`
-     <img class="monster-img" src="${m.image}" alt="${m.name}" onerror="this.style.opacity='.12'">
-     <div class="content">
-       <div class="top">
-         <div class="name">${m.name}</div>
-         <div class="status ${done?"done":partial?"partial":""}">${done?"✓ Completo":n+" / 2"}</div>
-       </div>
-       <div class="meta"><strong>HR:</strong> ${m.hr} &nbsp;•&nbsp; <strong>Local:</strong> ${m.area}</div>
-       <div class="event">📜 <strong>Event Quest:</strong> ${m.event || "Nenhuma missão específica de coroa cadastrada."}</div>
-       <div class="crowns">
-         <button class="crown small ${s.small?"active":""}" data-i="${i}" data-type="small">${s.small?"☑":"☐"} 🟡 Pequena</button>
-         <button class="crown large ${s.large?"active":""}" data-i="${i}" data-type="large">${s.large?"☑":"☐"} 🟢 Grande</button>
-       </div>
-     </div>`;
-   list.appendChild(card);
+  const s=state(i);if(!m[0].toLowerCase().includes(q)||!matches(m,s,f))return;
+  found++;const n=(s.small?1:0)+(s.large?1:0),done=n===2,partial=n===1;
+  const card=document.createElement("article");card.className="card"+(done?" done":"");
+  const img=document.createElement("img");img.className="monster-img";img.alt=m[0];img.loading="lazy";img.src=imageURL(m[1]);
+  img.onerror=()=>img.classList.add("missing");
+  const c=document.createElement("div");c.className="content";
+  c.innerHTML=`<div class="top"><div class="name"></div><div class="status ${done?"done":partial?"partial":""}">${done?"✓ Completo":n+" / 2"}</div></div>
+  <div class="meta"><strong>HR:</strong> ${m[2]} &nbsp;•&nbsp; <strong>Local:</strong> ${m[3]}</div>
+  <div class="event">📜 <strong>Event Quest:</strong> ${m[4]||"Nenhuma missão específica de coroa cadastrada."}</div>
+  <div class="crowns"><button class="crown small ${s.small?"active":""}">${s.small?"☑":"☐"} 🟡 Pequena</button><button class="crown large ${s.large?"active":""}">${s.large?"☑":"☐"} 🟢 Grande</button></div>`;
+  c.querySelector(".name").textContent=m[0];c.querySelector(".small").onclick=()=>toggle(i,"small");c.querySelector(".large").onclick=()=>toggle(i,"large");
+  card.append(img,c);list.append(card);
  });
- if(!found) list.innerHTML='<div class="empty">Nenhum monstro encontrado.</div>';
- list.querySelectorAll(".crown").forEach(b=>b.addEventListener("click",()=>toggle(Number(b.dataset.i),b.dataset.type)));
+ if(!found)list.innerHTML='<div class="empty">Nenhum monstro encontrado.</div>';
  updateProgress();
 }
+
 function updateProgress(){
- const d=load(); let count=0;
- monsters.forEach((_,i)=>{const s=d[i];if(s?.small)count++;if(s?.large)count++});
- const pct=Math.round(count/TOTAL*100);
- document.getElementById("progress").textContent=`${count} / ${TOTAL}`;
- document.getElementById("percent").textContent=`${pct}%`;
- document.getElementById("fill").style.width=pct+"%";
+ const d=load();let count=0;monsters.forEach((_,i)=>{const s=d[i];if(s?.small)count++;if(s?.large)count++});
+ const total=monsters.length*2,pct=Math.round(count/total*100);
+ document.getElementById("progress").textContent=`${count} / ${total}`;
+ document.getElementById("percent").textContent=pct+"%";document.getElementById("fill").style.width=pct+"%";
 }
-document.getElementById("search").addEventListener("input",render);
-document.getElementById("filter").addEventListener("change",render);
-document.getElementById("reset").addEventListener("click",()=>{
- if(confirm("Zerar todas as coroas marcadas neste aparelho?")){
-   localStorage.removeItem(KEY); render();
- }
-});
-if("serviceWorker" in navigator){
- window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
+
+document.getElementById("search").oninput=render;
+document.getElementById("filter").onchange=render;
+document.getElementById("reset").onclick=()=>{if(confirm("Zerar todas as coroas marcadas neste aparelho?")){localStorage.removeItem(KEY);render()}};
+
+/* Remove o Service Worker/cache antigo uma única vez, sem apagar as coroas. */
+if(!localStorage.getItem("mhWildsCacheReset_v3")){
+ localStorage.setItem("mhWildsCacheReset_v3","1");
+ if("serviceWorker"in navigator)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});
+ if("caches"in window)caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))).catch(()=>{});
 }
 render();
 </script>
