@@ -1,36 +1,29 @@
-# MH Wilds Crown Tracker
+# 🎯 Monster Hunter Wilds – Crown Tracker
 
-PWA simples para acompanhar Small Crown e Large Crown no Monster Hunter Wilds.
+<p align="center">
+  <img src="./imagens/mhwilds.gif" width="800">
+</p>
 
-## Publicar no GitHub Pages
+Criei um rastreador para ajudar na busca pelas **Coroas Pequenas e Coroas Grandes** em Monster Hunter Wilds! 🐉
 
-1. Crie um repositório no GitHub, por exemplo:
-   `mh-wilds-crown-tracker`
-2. Envie todos os arquivos desta pasta para o repositório.
-3. No GitHub, abra:
-   **Settings → Pages**
-4. Em **Build and deployment**, escolha:
-   **Deploy from a branch**
-5. Selecione a branch `main` e a pasta `/ (root)`.
-6. Salve.
-7. Depois de alguns minutos, o GitHub fornecerá o endereço do site.
+A ideia é facilitar o acompanhamento das coroas que você já encontrou e das que ainda faltam, evitando ter que ficar anotando tudo manualmente.
 
-## Imagens dos monstros
+🌐 **Acesse o Crown Tracker diretamente pelo painel:**
 
-Coloque as imagens PNG na pasta `imagens/` usando exatamente os nomes indicados no
-`index.html`, por exemplo:
+👉 **[ABRIR CROWN TRACKER](https://joaomocuba.github.io/mh-wilds-crown-tracker/)**
 
-`imagens/doshaguma.png`
+Você pode abrir o painel pelo celular ou pelo computador e usar o rastreador enquanto joga.
 
-Se ainda não tiver as imagens, o tracker continua funcionando; o espaço da imagem
-apenas ficará vazio.
+📌 **O projeto está disponível no GitHub:**
 
-## Instalação como aplicativo
+👉 **[Ver o projeto no GitHub](https://github.com/JoaoMocuba/mh-wilds-crown-tracker)**
 
-Abra o endereço do GitHub Pages no celular. Em navegadores compatíveis, use
-"Adicionar à tela inicial" / "Instalar aplicativo".
+Se o projeto for útil para você, deixe uma ⭐ no repositório. Isso ajuda bastante a divulgar o projeto e também me incentiva a continuar melhorando o tracker.
 
-## Progresso
+🔧 **Em desenvolvimento**
 
-O progresso é salvo no armazenamento local do aparelho/navegador. Cada pessoa
-terá seu próprio checklist. Ele não é sincronizado entre aparelhos.
+Ainda estou trabalhando em melhorias, correções e novas funcionalidades para deixar o rastreador cada vez mais completo.
+
+🐲⚔️ **Boa caçada!**
+
+#MonsterHunterWilds #MonsterHunter #MHWILDS #CrownTracker #Gaming #GitHub
