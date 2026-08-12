@@ -1,8 +1,5 @@
 # 🎯 Monster Hunter Wilds – Crown Tracker
 
-<p align="center">
-  <img src="./imagens/mhwilds.gif" width="800">
-</p>
 
 Criei um rastreador para ajudar na busca pelas **Coroas Pequenas e Coroas Grandes** em Monster Hunter Wilds! 🐉
 
@@ -26,4 +23,4 @@ Ainda estou trabalhando em melhorias, correções e novas funcionalidades para d
 
 🐲⚔️ **Boa caçada!**
 
-#MonsterHunterWilds #MonsterHunter #MHWILDS #CrownTracker #Gaming #GitHub
+
